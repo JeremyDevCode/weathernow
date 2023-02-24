@@ -17,6 +17,8 @@ export default function Home() {
 
   const [image, setImage] = useState(cloud);
   const [weather, setWeather] = useState();
+  const [notFound, setNotFound] = useState(false);
+  const [weatherStatus, setWeatherStatus] = useState(false);
   
   const getWeather = async () => {
     const city = inputRef.current.value;
@@ -26,8 +28,12 @@ export default function Home() {
     .then(res => res.json())
     .then(data => {
       if(data.cod === '404') {
-        return; 
+        setWeatherStatus(false);
+        setNotFound(true);
+        return;
       }
+      setNotFound(false);
+      setWeatherStatus(true);
       console.log(data);
       setWeather(data);
       switch (data.weather[0].main) {
@@ -54,21 +60,18 @@ export default function Home() {
 
   return (
    <main className='flex items-center justify-center h-screen bg-[#06283D] box-border'>
-      <div className='relative w-[400px] h-[605px] bg-white py-5 px-8 overflow-hidden rounded-2xl transition delay-75 ease-out'>
+      <div className={`relative w-[400px] transition-all duration-200 ${!weatherStatus ? 'h-[105px]' : 'h-[605px]'} bg-white py-5 px-8 overflow-hidden rounded-2xl`}>
         <div className='flex items-center justify-between w-full h-min'>
           <Pin/>
           <input ref={inputRef} className='outline-none text-[#06283D] w-4/5 text-2xl font-medium uppercase pl-8 placeholder:text-xl placeholder:text-[#06283D] placeholder:capitalize' type='text' placeholder='Enter your location'/>
           <button onClick={getWeather} className='cursor-pointer w-[50px] h-[50px] text-[#06283D] bg-[#DFF6FF] flex items-center justify-center rounded-full transition delay-[40] ease-linear hover:text-white hover:bg-[#06283D]'>
             <Search/>
           </button>
+          
         </div>
+        <h2 className={`text-center ${!notFound ? 'hidden' : 'block'} text-red-600`}>Please enter a valid location</h2>
 
-        <div className='hidden w-full mt-12 text-center scale-0 opacity-0'>
-          <Image src={error} className='w-3/4' alt='Error 404'/>
-          <p className='text-[#06283D] text-[22px] font-medium mt-3'>Oops! Invalid location</p>
-        </div>
-
-        <div className='flex flex-col items-center justify-center scale opacity'>
+        <div className={`flex flex-col items-center justify-center transition-all ${weatherStatus ? 'scale-100 opacity-100' : 'scale-0 opacity-0'}`}>
           <Image src={image} width={500} height={500} className='w-3/5 mt-[30px]' alt={image} priority={true}/>
           <p className='relative text-[#06283D] text-[4rem] font-extrabold mt-[30px] ml-[-16px]'>{Math.round(weather?.main?.temp) || 'Waiting'}</p>
           <p className='text-[#06283D] text-[22px] font-medium capitalize'>{weather?.weather[0]?.description}</p>
