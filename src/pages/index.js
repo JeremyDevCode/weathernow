@@ -21,6 +21,7 @@ export default function Home() {
   const [weatherStatus, setWeatherStatus] = useState(false);
   
   const getWeather = async () => {
+    setWeatherStatus(false);
     const city = inputRef.current.value;
     if(city === '') return;
 
