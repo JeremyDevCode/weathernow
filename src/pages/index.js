@@ -72,7 +72,7 @@ export default function Home() {
 
         <div className={`flex flex-col items-center justify-center transition-all ${weatherStatus ? 'scale-100 opacity-100' : 'scale-0 opacity-0'}`}>
           <Image src={image} width={500} height={500} className='w-3/5 mt-[30px]' alt={image} priority={true}/>
-          <p className='relative text-[#06283D] text-[4rem] font-extrabold mt-[30px] ml-[-16px]'>{Math.round(weather?.main?.temp) || 'Waiting'}</p>
+          <p className='relative text-[#06283D] text-[4rem] font-extrabold mt-[30px]'>{Math.round(weather?.main?.temp) || 'Waiting'}<span className='absolute text-2xl'>°C</span></p>
           <p className='text-[#06283D] text-[22px] font-medium capitalize'>{weather?.weather[0]?.description}</p>
         </div>
 
