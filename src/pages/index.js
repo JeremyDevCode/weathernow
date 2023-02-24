@@ -33,28 +33,27 @@ export default function Home() {
         return;
       }
       setNotFound(false);
-      setWeatherStatus(true);
-      console.log(data);
       setWeather(data);
       switch (data.weather[0].main) {
         case 'Clear': 
-            setImage(clear);
-            break;
+        setImage(clear);
+        break;
         case 'Rain': 
             setImage(rain);
             break;
         case 'Snow': 
-            setImage(snow);
-            break;
+        setImage(snow);
+        break;
         case 'Clouds': 
-            setImage(cloud);
-            break;
+        setImage(cloud);
+        break;
         case 'Haze': 
-            setImage(mist);
-            break;
+        setImage(mist);
+        break;
         default: 
             setImage(cloud);
-      }
+          }
+          setWeatherStatus(true);
     })
   };
 
