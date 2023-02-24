@@ -60,10 +60,10 @@ export default function Home() {
 
   return (
    <main className='flex items-center justify-center h-screen bg-[#06283D] box-border'>
-      <div className={`relative w-[400px] transition-all duration-200 ${!weatherStatus ? 'h-[105px]' : 'h-[605px]'} bg-white py-5 px-8 overflow-hidden rounded-2xl`}>
+      <div className={`relative w-[400px] transition-all duration-500 ${!weatherStatus ? 'h-[90px]' : 'h-[605px]'} bg-white py-5 px-8 overflow-hidden rounded-2xl`}>
         <div className='flex items-center justify-between w-full h-min'>
           <Pin/>
-          <input ref={inputRef} className='outline-none text-[#06283D] w-4/5 text-2xl font-medium uppercase pl-8 placeholder:text-xl placeholder:text-[#06283D] placeholder:capitalize' type='text' placeholder='Enter your location'/>
+          <input ref={inputRef} className='outline-none text-[#06283D] w-4/5 text-2xl font-medium pl-8 placeholder:text-xl placeholder:text-[#06283D]' type='text' placeholder='Enter your location'/>
           <button onClick={getWeather} className='cursor-pointer w-[50px] h-[50px] text-[#06283D] bg-[#DFF6FF] flex items-center justify-center rounded-full transition delay-[40] ease-linear hover:text-white hover:bg-[#06283D]'>
             <Search/>
           </button>
